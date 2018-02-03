@@ -132,38 +132,43 @@ public class MatrixVisitedPathTest {
     }
 
     @Test
-    public  void initialPathTraverseSuccess()
-    {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{ { 2, 2, 2, 2, 2 } });
+    public void initialPathTraverseSuccess() {
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{2, 2, 2, 2, 2}});
         assertThat(matrixVisitedPath.isSuccessful(matrixTwoD), is(false));
     }
 
     @Test
-    public void pathTraverseSuccess()
-    {
+    public void pathTraverseSuccess() {
 
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{ { 2, 2, 2, 2, 2 } });
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{2, 2, 2, 2, 2}});
         matrixVisitedPath.pathVisited(matrixTwoD);
-        matrixVisitedPath.pathVisited(matrixTwoD);
-        matrixVisitedPath.pathVisited(matrixTwoD);
-        matrixVisitedPath.pathVisited(matrixTwoD);
-        matrixVisitedPath.pathVisited(matrixTwoD);
-        assertThat(matrixVisitedPath.isSuccessful(matrixTwoD), is(false));
-
-        matrixTwoD = new MatrixTwoD(new int[][]{ { 2, 2, 2, 2, 2 } });
         matrixVisitedPath.pathVisited(matrixTwoD);
         matrixVisitedPath.pathVisited(matrixTwoD);
         matrixVisitedPath.pathVisited(matrixTwoD);
         matrixVisitedPath.pathVisited(matrixTwoD);
         assertThat(matrixVisitedPath.isSuccessful(matrixTwoD), is(true));
+    }
 
-        matrixTwoD = new MatrixTwoD(new int[][]{ { 2, 2, 2, 2, 45 } });
-        matrixVisitedPath.pathVisited(matrixTwoD);
-        matrixVisitedPath.pathVisited(matrixTwoD);
-        matrixVisitedPath.pathVisited(matrixTwoD);
-        matrixVisitedPath.pathVisited(matrixTwoD);
-        matrixVisitedPath.pathVisited(matrixTwoD);
-        assertThat(matrixVisitedPath.isSuccessful(matrixTwoD), is(false));
+    @Test
+    public void pathTraversePartially() {
+        MatrixTwoD matrixTwoD1 = new MatrixTwoD(new int[][]{{2, 2, 2, 2, 2}});
+        matrixVisitedPath.pathVisited(matrixTwoD1);
+        matrixVisitedPath.pathVisited(matrixTwoD1);
+        matrixVisitedPath.pathVisited(matrixTwoD1);
+        matrixVisitedPath.pathVisited(matrixTwoD1);
+        assertThat(matrixVisitedPath.isSuccessful(matrixTwoD1), is(false));
+
+    }
+
+    @Test
+    public void pathTraverseFailureDueTOTotalCost() {
+        MatrixTwoD matrixTwoD2 = new MatrixTwoD(new int[][]{{2, 2, 2, 2, 45}});
+        matrixVisitedPath.pathVisited(matrixTwoD2);
+        matrixVisitedPath.pathVisited(matrixTwoD2);
+        matrixVisitedPath.pathVisited(matrixTwoD2);
+        matrixVisitedPath.pathVisited(matrixTwoD2);
+        matrixVisitedPath.pathVisited(matrixTwoD2);
+        assertThat(matrixVisitedPath.isSuccessful(matrixTwoD2), is(false));
 
     }
 

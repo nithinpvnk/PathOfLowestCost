@@ -17,8 +17,7 @@ public class MatrixVisitedPath {
         return totalCost;
     }
 
-    public int getCurrentColumn()
-    {
+    public int getCurrentColumn() {
         return currentColumn;
     }
 
@@ -40,6 +39,6 @@ public class MatrixVisitedPath {
     }
 
     public boolean isSuccessful(MatrixTwoD matrixTwoD) {
-        return true;
+        return (pathVisited.size() == matrixTwoD.getColumnCount()) && (totalCost < 50);
     }
 }

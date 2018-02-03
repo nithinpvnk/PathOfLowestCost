@@ -15,12 +15,13 @@ public class MatrixVisitedPath {
 
     public void pathVisited(MatrixTwoD matrixTwoD) {
         int currentRow = 1;
-        totalCost += matrixTwoD.getValueAtCell(currentRow, currentColumn);
+        if (visitPossible(matrixTwoD)) {
+            totalCost += matrixTwoD.getValueAtCell(currentRow, currentColumn);
+        }
         currentColumn++;
     }
 
-    public boolean visitPossible(MatrixTwoD matrixTwoD)
-    {
-        return currentColumn <= matrixTwoD.getColumnCount();
+    public boolean visitPossible(MatrixTwoD matrixTwoD) {
+        return ((currentColumn <= matrixTwoD.getColumnCount()) && (totalCost < 50));
     }
 }

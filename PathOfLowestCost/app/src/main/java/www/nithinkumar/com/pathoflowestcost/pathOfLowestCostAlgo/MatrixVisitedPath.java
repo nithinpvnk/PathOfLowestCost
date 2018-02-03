@@ -13,6 +13,11 @@ public class MatrixVisitedPath {
         return totalCost;
     }
 
+    public int getCurrentColumn()
+    {
+        return 0;
+    }
+
     public void pathVisited(MatrixTwoD matrixTwoD) {
         int currentRow = 1;
         if (visitPossible(matrixTwoD)) {

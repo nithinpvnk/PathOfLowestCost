@@ -84,8 +84,25 @@ public class MatrixVisitedPathTest {
     public void isVisitPossibleAfterTotalCostReachesFiftyOrMore() {
         MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{48, 2, 3, 4, 5}});
         matrixVisitedPath.pathVisited(matrixTwoD);
+        assertThat(matrixVisitedPath.visitPossible(matrixTwoD), is(true));
         matrixVisitedPath.pathVisited(matrixTwoD);
         assertThat(matrixVisitedPath.visitPossible(matrixTwoD), is(false));
+    }
+
+    @Test
+    public void notPossibleToTraverseWhenFirstValueExceedsLimit()
+    {
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{51, 2, 3, 4, 5}});
+        assertThat(matrixVisitedPath.visitPossible(matrixTwoD), is(false));
+    }
+
+    @Test
+    public void totalCostDoesNotAccumulatedIfFirstValueExceedsLimit()
+    {
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{51, 2, 3, 4, 5}});
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        assertThat(matrixVisitedPath.getTotalCost(), equalTo(0));
+
     }
 
     @Test
@@ -98,6 +115,15 @@ public class MatrixVisitedPathTest {
         matrixVisitedPath.pathVisited(matrixTwoD);
         matrixVisitedPath.pathVisited(matrixTwoD);
         assertThat(matrixVisitedPath.getTotalCost(), equalTo(50));
+    }
+
+    @Test
+    public void incrementOfColumnValueNotPossible()
+    {
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{48, 2, 3, 4, 5}});
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        assertThat(matrixVisitedPath.getCurrentColumn(), equalTo(1));
     }
 
     @Test

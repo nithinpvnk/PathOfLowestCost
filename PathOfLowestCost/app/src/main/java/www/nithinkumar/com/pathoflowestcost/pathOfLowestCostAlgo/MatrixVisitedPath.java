@@ -10,6 +10,7 @@ public class MatrixVisitedPath {
     private int totalCost;
     private int currentColumn;
     private List<Integer> pathVisited = new ArrayList<>();
+    public static int MAXIMUM_COST = 50;
 
 
     //Getter method to retrieve that score
@@ -31,7 +32,7 @@ public class MatrixVisitedPath {
     }
 
     public boolean visitPossible(MatrixTwoD matrixTwoD) {
-        return ((currentColumn < matrixTwoD.getColumnCount()) && (totalCost < 50));
+        return ((currentColumn < matrixTwoD.getColumnCount()) && (!nextVisitPossible(matrixTwoD)));
     }
 
     public List<Integer> getPathVisited() {
@@ -39,6 +40,10 @@ public class MatrixVisitedPath {
     }
 
     public boolean isSuccessful(MatrixTwoD matrixTwoD) {
-        return (pathVisited.size() == matrixTwoD.getColumnCount()) && (totalCost < 50);
+        return (pathVisited.size() == matrixTwoD.getColumnCount()) && (totalCost < MAXIMUM_COST);
+    }
+
+    private boolean nextVisitPossible(MatrixTwoD matrixTwoD) {
+        return (totalCost + matrixTwoD.getValueAtCell(1, currentColumn + 1)) > MAXIMUM_COST;
     }
 }

@@ -120,7 +120,7 @@ public class MatrixVisitedPathTest {
     @Test
     public void incrementOfColumnValueNotPossible()
     {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{48, 2, 3, 4, 5}});
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{50, 2, 3, 4, 5}});
         matrixVisitedPath.pathVisited(matrixTwoD);
         matrixVisitedPath.pathVisited(matrixTwoD);
         assertThat(matrixVisitedPath.getCurrentColumn(), equalTo(1));

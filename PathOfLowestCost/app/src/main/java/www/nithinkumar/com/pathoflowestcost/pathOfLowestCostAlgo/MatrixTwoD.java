@@ -3,6 +3,7 @@ package www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo;
 
 public class MatrixTwoD {
 
+    private int[][] values; //Gloabal variable to access the values for other operations
     public MatrixTwoD(int[][] values) {
 
         if (values.length < 1 || values.length > 10) {
@@ -12,5 +13,12 @@ public class MatrixTwoD {
             // This checks and throws the IllegalArgumentException if the value of columns is not in the range of 5 to 100 both inclusive
             throw new IllegalArgumentException("Between five and one hundred columns of values are expected");
         }
+
+        this.values = values;
+    }
+
+    public int getValueAtCell(int row, int column)
+    {
+        return 0;
     }
 }

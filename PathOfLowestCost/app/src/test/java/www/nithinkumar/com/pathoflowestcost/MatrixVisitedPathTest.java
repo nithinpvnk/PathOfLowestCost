@@ -20,6 +20,8 @@ public class MatrixVisitedPathTest {
     public void initialZeroScore()
     {
         MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath();
-        assertThat(matrixVisitedPath.score, equalTo(0));
+        assertThat(matrixVisitedPath.getScore(), equalTo(0));
     }
+
+
 }

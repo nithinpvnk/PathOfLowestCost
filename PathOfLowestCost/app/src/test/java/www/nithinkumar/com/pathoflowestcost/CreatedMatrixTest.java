@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo.MatrixTwoD;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
+
 /*
  * This is a test suite used to check the condition of rows and columns present in the given matrix
  */
@@ -53,5 +56,15 @@ public class CreatedMatrixTest {
     public void ProperMatrix() {
         int[][] values = new int[7][77];
         MatrixTwoD matrixTwoD = new MatrixTwoD(values);
+    }
+
+    @Test
+    public void getValueFromParticularCellInMatrix()
+    {
+        int values[][] = new int[][]{ { 1, 3, 5, 7, 9 },{ 2, 4, 6, 8, 10} };
+        MatrixTwoD matrixTwoD = new MatrixTwoD(values);
+
+        assertThat(matrixTwoD.getValueAtCell(1,1), equalTo(1));
+        assertThat(matrixTwoD.getValueAtCell(2,5), equalTo(10));
     }
 }

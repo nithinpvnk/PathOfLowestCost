@@ -3,6 +3,9 @@ package www.nithinkumar.com.pathoflowestcost;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo.MatrixTwoD;
 import www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo.MatrixVisitedPath;
 
@@ -99,6 +102,27 @@ public class MatrixVisitedPathTest {
         MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{48, 2, 3, 4, 5}});
         matrixVisitedPath.pathVisited(matrixTwoD);
         assertThat(matrixVisitedPath.getCurrentColumn(), equalTo(1));
+    }
+
+    @Test
+    public void initialPathIsEmpty()
+    {
+        assertThat(matrixVisitedPath.getPathVisited().size(), equalTo(0));
+    }
+
+    @Test
+    public void rowsAdditionToPathAfterVisit()
+    {
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{8, 2, 3, 4, 5}});
+        List<Integer> expectedPath = new ArrayList<Integer>();
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        expectedPath.add(1);
+        assertThat(matrixVisitedPath.getPathVisited(), equalTo(expectedPath));
+
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        expectedPath.add(1);
+        assertThat(matrixVisitedPath.getPathVisited(), equalTo(expectedPath));
+
     }
 
 }

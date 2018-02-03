@@ -1,6 +1,8 @@
 package www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo;
 
 
+import java.util.List;
+
 public class MatrixVisitedPath {
 
     //Variable to hold the cost of the path
@@ -27,5 +29,9 @@ public class MatrixVisitedPath {
 
     public boolean visitPossible(MatrixTwoD matrixTwoD) {
         return ((currentColumn < matrixTwoD.getColumnCount()) && (totalCost < 50));
+    }
+
+    public List<Integer> getPathVisited() {
+        return null;
     }
 }

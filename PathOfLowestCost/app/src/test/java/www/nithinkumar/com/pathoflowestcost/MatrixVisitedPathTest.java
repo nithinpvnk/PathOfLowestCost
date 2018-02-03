@@ -65,7 +65,35 @@ public class MatrixVisitedPathTest {
         matrixVisitedPath.pathVisited(matrixTwoD);
         matrixVisitedPath.pathVisited(matrixTwoD);
         assertThat(matrixVisitedPath.visitPossible(matrixTwoD), is(false));
+    }
 
+    @Test
+    public void isVisitPossibleAfterTotalCostReachesFiftyOrMore()
+    {
+        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath();
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{48, 2, 3, 4, 5}});
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        assertThat(matrixVisitedPath.visitPossible(matrixTwoD), is(false));
+
+        matrixTwoD = new MatrixTwoD(new int[][]{{40, 2, 3, 4, 5}});
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        assertThat(matrixVisitedPath.visitPossible(matrixTwoD), is(true));
+    }
+
+    @Test
+    public void totalCostDoesNotIncreaseAfterReachingFifty()
+    {
+        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath();
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{48, 2, 3, 4, 5}});
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        assertThat(matrixVisitedPath.getTotalCost(), equalTo(50));
+
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        assertThat(matrixVisitedPath.getTotalCost(), equalTo(50));
     }
 
 

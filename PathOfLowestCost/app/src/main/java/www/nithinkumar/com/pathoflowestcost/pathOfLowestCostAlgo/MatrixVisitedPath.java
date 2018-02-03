@@ -9,7 +9,7 @@ public class MatrixVisitedPath {
     //Variable to hold the cost of the path
     private int totalCost;
     private int currentColumn;
-    private List<Integer> pathVisited = new ArrayList<Integer>();
+    private List<Integer> pathVisited = new ArrayList<>();
 
 
     //Getter method to retrieve that score
@@ -37,5 +37,9 @@ public class MatrixVisitedPath {
 
     public List<Integer> getPathVisited() {
         return pathVisited;
+    }
+
+    public boolean isSuccessful(MatrixTwoD matrixTwoD) {
+        return true;
     }
 }

@@ -11,6 +11,15 @@ public class MatrixVisitedPath {
     private int currentColumn;
     private List<Integer> pathVisited = new ArrayList<>();
     public static int MAXIMUM_COST = 50;
+    private MatrixTwoD matrixTwoD;
+
+    public MatrixVisitedPath(MatrixTwoD matrixTwoD) {
+        if (matrixTwoD == null) {
+            throw new IllegalArgumentException("A matrix is required to find the visited path");
+        }
+
+        this.matrixTwoD = matrixTwoD;
+    }
 
 
     //Getter method to retrieve that score
@@ -22,28 +31,28 @@ public class MatrixVisitedPath {
         return currentColumn;
     }
 
-    public void pathVisited(MatrixTwoD matrixTwoD) {
+    public void pathVisited() {
         int currentRow = 1;
-        if (visitPossible(matrixTwoD)) {
+        if (visitPossible()) {
             currentColumn++;
             totalCost += matrixTwoD.getValueAtCell(currentRow, currentColumn);
             pathVisited.add(1);
         }
     }
 
-    public boolean visitPossible(MatrixTwoD matrixTwoD) {
-        return ((currentColumn < matrixTwoD.getColumnCount()) && (!nextVisitPossible(matrixTwoD)));
+    public boolean visitPossible() {
+        return ((currentColumn < matrixTwoD.getColumnCount()) && (!nextVisitPossible()));
     }
 
     public List<Integer> getPathVisited() {
         return pathVisited;
     }
 
-    public boolean isSuccessful(MatrixTwoD matrixTwoD) {
+    public boolean isSuccessful() {
         return (pathVisited.size() == matrixTwoD.getColumnCount()) && (totalCost < MAXIMUM_COST);
     }
 
-    private boolean nextVisitPossible(MatrixTwoD matrixTwoD) {
+    private boolean nextVisitPossible() {
         return (totalCost + matrixTwoD.getValueAtCell(1, currentColumn + 1)) > MAXIMUM_COST;
     }
 }

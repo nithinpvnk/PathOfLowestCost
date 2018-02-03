@@ -3,18 +3,19 @@ package www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo;
 
 public class MatrixVisitedPath {
 
+
     //Variable to hold the cost of the path
-    private int score;
+    private int totalCost;
     private int currentColumn = 1;
 
     //Getter method to retrieve that score
-    public int getScore() {
-        return score;
+    public int getTotalCost() {
+        return totalCost;
     }
 
     public void pathVisited(MatrixTwoD matrixTwoD) {
         int currentRow = 1;
-        score += matrixTwoD.getValueAtCell(currentRow, currentColumn);
+        totalCost += matrixTwoD.getValueAtCell(currentRow, currentColumn);
         currentColumn++;
     }
 

@@ -19,37 +19,37 @@ public class MatrixVisitedPathTest {
      * This checks if the initial value of the score variable which stores the cost is equivalent to zero or not
      */
     @Test
-    public void initialZeroScore() {
+    public void initialTotalCostZero() {
         MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath();
-        assertThat(matrixVisitedPath.getScore(), equalTo(0));
+        assertThat(matrixVisitedPath.getTotalCost(), equalTo(0));
     }
 
     @Test
-    public void scoreAfterOneMove() {
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath();
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{1, 2, 3, 4, 5}});
-        matrixVisitedPath.pathVisited(matrixTwoD);
-        assertThat(matrixVisitedPath.getScore(), equalTo(1));
-    }
-
-    @Test
-    public void scoreAfterTwoMoves() {
+    public void totalCostAfterOneMove() {
         MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath();
         MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{1, 2, 3, 4, 5}});
         matrixVisitedPath.pathVisited(matrixTwoD);
+        assertThat(matrixVisitedPath.getTotalCost(), equalTo(1));
+    }
+
+    @Test
+    public void totalCostAfterTwoMoves() {
+        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath();
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{1, 2, 3, 4, 5}});
         matrixVisitedPath.pathVisited(matrixTwoD);
-        assertThat(matrixVisitedPath.getScore(), equalTo(3));
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        assertThat(matrixVisitedPath.getTotalCost(), equalTo(3));
 
     }
 
     @Test
-    public void scoreAfterMovingThroughEntireRow() {
+    public void totalCostAfterMovingThroughEntireRow() {
         MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath();
         MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{1, 2, 3, 4, 5}});
         for (int i = 0; i < matrixTwoD.getColumnCount(); i++) {
             matrixVisitedPath.pathVisited(matrixTwoD);
         }
-        assertThat(matrixVisitedPath.getScore(), equalTo(15));
+        assertThat(matrixVisitedPath.getTotalCost(), equalTo(15));
     }
 
     @Test

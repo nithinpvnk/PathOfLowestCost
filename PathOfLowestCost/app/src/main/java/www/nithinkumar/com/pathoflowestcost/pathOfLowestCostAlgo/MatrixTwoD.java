@@ -27,10 +27,10 @@ public class MatrixTwoD {
     }
 
     public int getRowCount() {
-        return 0;
+        return values.length;
     }
 
     public int getColumnCount() {
-       return 0;
+       return values[0].length;
     }
 }

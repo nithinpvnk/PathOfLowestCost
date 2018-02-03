@@ -67,4 +67,25 @@ public class CreatedMatrixTest {
         assertThat(matrixTwoD.getValueAtCell(1,1), equalTo(1));
         assertThat(matrixTwoD.getValueAtCell(2,5), equalTo(10));
     }
+
+    @Test
+    public void getRowCount()
+    {
+        MatrixTwoD threeRowGrid = new MatrixTwoD(new int[][]{ { 1, 2, 3, 4, 5 }, { 1, 2, 3, 4, 5 }, { 1, 2, 3, 4, 5 } });
+        MatrixTwoD fiveRowGrid = new MatrixTwoD(new int[][]{ { 1, 2, 3, 4, 5 }, { 1, 2, 3, 4, 5 }, { 1, 2, 3, 4, 5 }, { 1, 2, 3, 4, 5 }, { 1, 2, 3, 4, 5 } });
+
+        assertThat(threeRowGrid.getRowCount(), equalTo(3));
+        assertThat(fiveRowGrid.getRowCount(), equalTo(5));
+    }
+
+    @Test
+    public void getColumnCount()
+    {
+        MatrixTwoD fiveColumnGrid = new MatrixTwoD(new int[][]{ { 1, 2, 3, 4, 5 }, { 1, 2, 3, 4, 5 }, { 1, 2, 3, 4, 5 } });
+        MatrixTwoD tenColumnGrid = new MatrixTwoD(new int[][]{ { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } });
+
+        assertThat(fiveColumnGrid.getColumnCount(), equalTo(5));
+        assertThat(tenColumnGrid.getColumnCount(), equalTo(10));
+
+    }
 }

@@ -3,6 +3,8 @@ package www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo;
 
 public class MatrixTwoD {
 
+    private int[][] values;
+
     public MatrixTwoD(int[][] values) {
 
         if (values.length < 1 || values.length > 10) {
@@ -12,6 +14,8 @@ public class MatrixTwoD {
             // This checks and throws the IllegalArgumentException if the value of columns is not in the range of 5 to 100 both inclusive
             throw new IllegalArgumentException("Between five and one hundred columns of values are expected");
         }
+
+        this.values = values;
     }
 
     /*
@@ -19,6 +23,14 @@ public class MatrixTwoD {
      */
     public int getValueAtCell(int row, int column)
     {
+        return values[row - 1][column - 1];
+    }
+
+    public int getRowCount() {
         return 0;
+    }
+
+    public int getColumnCount() {
+       return 0;
     }
 }

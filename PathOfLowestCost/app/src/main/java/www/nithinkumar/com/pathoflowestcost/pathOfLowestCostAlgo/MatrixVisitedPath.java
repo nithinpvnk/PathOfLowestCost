@@ -1,13 +1,16 @@
 package www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MatrixVisitedPath {
 
     //Variable to hold the cost of the path
     private int totalCost;
-    private int currentColumn = 0;
+    private int currentColumn;
+    private List<Integer> pathVisited = new ArrayList<Integer>();
+
 
     //Getter method to retrieve that score
     public int getTotalCost() {
@@ -24,6 +27,7 @@ public class MatrixVisitedPath {
         if (visitPossible(matrixTwoD)) {
             currentColumn++;
             totalCost += matrixTwoD.getValueAtCell(currentRow, currentColumn);
+            pathVisited.add(1);
         }
     }
 
@@ -32,6 +36,6 @@ public class MatrixVisitedPath {
     }
 
     public List<Integer> getPathVisited() {
-        return null;
+        return pathVisited;
     }
 }

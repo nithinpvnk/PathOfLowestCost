@@ -3,9 +3,10 @@ package www.nithinkumar.com.pathoflowestcost;
 import org.junit.Test;
 
 import www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo.MatrixTwoD;
-    /*
-     * This is a test suite used to check the condition of rows and columns present in the given matrix
-     */
+
+/*
+ * This is a test suite used to check the condition of rows and columns present in the given matrix
+ */
 public class CreatedMatrixTest {
 
     /*

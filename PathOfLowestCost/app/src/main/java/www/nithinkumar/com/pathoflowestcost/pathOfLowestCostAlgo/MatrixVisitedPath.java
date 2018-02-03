@@ -20,6 +20,6 @@ public class MatrixVisitedPath {
 
     public boolean visitPossible(MatrixTwoD matrixTwoD)
     {
-        return true;
+        return currentColumn <= matrixTwoD.getColumnCount();
     }
 }

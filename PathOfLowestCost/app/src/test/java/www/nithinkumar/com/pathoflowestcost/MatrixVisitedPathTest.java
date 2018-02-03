@@ -53,10 +53,9 @@ public class MatrixVisitedPathTest {
     }
 
     @Test
-    public void isAnotherVisitPossible()
-    {
+    public void isAnotherVisitPossible() {
         MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath();
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{ { 1, 2, 3, 4, 5 } });
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{1, 2, 3, 4, 5}});
         matrixVisitedPath.pathVisited(matrixTwoD);
         matrixVisitedPath.pathVisited(matrixTwoD);
         assertThat(matrixVisitedPath.visitPossible(matrixTwoD), is(true));
@@ -65,7 +64,7 @@ public class MatrixVisitedPathTest {
         matrixVisitedPath.pathVisited(matrixTwoD);
         matrixVisitedPath.pathVisited(matrixTwoD);
         matrixVisitedPath.pathVisited(matrixTwoD);
-        assertThat(matrixVisitedPath.visitPossible(matrixTwoD), is(true));
+        assertThat(matrixVisitedPath.visitPossible(matrixTwoD), is(false));
 
     }
 

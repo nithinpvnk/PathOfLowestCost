@@ -89,22 +89,16 @@ public class MatrixVisitedPathTest {
     }
 
     @Test
-    public void initialColumnAtZero()
-    {
-
+    public void initialColumnAtZero() {
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{48, 2, 3, 4, 5}});
+        assertThat(matrixVisitedPath.getCurrentColumn(), equalTo(0));
     }
 
     @Test
-    public void initialRowAtZero()
-    {
-
-
-    }
-
-    @Test
-    public void incrementOfColumnValueAfterVisit()
-    {
-
+    public void incrementOfColumnValueAfterVisit() {
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{48, 2, 3, 4, 5}});
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        assertThat(matrixVisitedPath.getCurrentColumn(), equalTo(1));
     }
 
 }

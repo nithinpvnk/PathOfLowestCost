@@ -1,12 +1,12 @@
 package www.nithinkumar.com.pathoflowestcost;
 
-import org.junit.Rule;
 import org.junit.Test;
 
 import www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo.MatrixTwoD;
 import www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo.MatrixVisitedPath;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -50,6 +50,22 @@ public class MatrixVisitedPathTest {
             matrixVisitedPath.pathVisited(matrixTwoD);
         }
         assertThat(matrixVisitedPath.getScore(), equalTo(15));
+    }
+
+    @Test
+    public void isAnotherVisitPossible()
+    {
+        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath();
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{ { 1, 2, 3, 4, 5 } });
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        assertThat(matrixVisitedPath.visitPossible(matrixTwoD), is(true));
+
+
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        matrixVisitedPath.pathVisited(matrixTwoD);
+        assertThat(matrixVisitedPath.visitPossible(matrixTwoD), is(true));
 
     }
 

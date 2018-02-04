@@ -1,4 +1,4 @@
-package www.nithinkumar.com.pathoflowestcost;
+package www.nithinkumar.com.pathoflowestcost.util;
 
 
 import org.junit.Test;

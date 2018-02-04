@@ -3,10 +3,8 @@ package www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo.MatrixTwoD;
-import www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo.MatrixVisitedPath;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -19,197 +17,127 @@ import static org.junit.Assert.assertThat;
 public class MatrixVisitedPathTest {
 
     @Test(expected = IllegalArgumentException.class)
-    public void constructorWithoutMatrixArgument() {
+    public void cannotBeConstructedWithoutAGrid() {
         new MatrixVisitedPath(null);
     }
 
-    /*
-     * This checks if the initial value of the Total cost variable which stores the cost is equivalent to zero or not
-     */
     @Test
-    public void initialTotalCostZero() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{1, 2, 3, 4, 5}});
+    public void getBestPathForAllRowsReturnsLongerPathsAheadOfShorterPathsWithLowerCost() {
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{
+                {2, 1, PathState.MAXIMUM_COST, PathState.MAXIMUM_COST, 1},
+                {1, 10, 10, PathState.MAXIMUM_COST, 5}});
         MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        assertThat(matrixVisitedPath.getPathState().getTotalCost(), equalTo(0));
+        List<Integer> expectedPath = new ArrayList<>(
+                Arrays.asList(new Integer[]{2, 1, 2})
+        );
+
+        PathState result = matrixVisitedPath.getBestPathForGrid();
+
+        assertThat(result.getTotalCost(), equalTo(12));
+        assertThat(result.getRowsTraversed(), equalTo(expectedPath));
     }
 
-    /*
-     * This checks the value of the Total cost variable which stores the cost after one move in the matrix
-     */
     @Test
-    public void totalCostAfterOneMove() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{1, 2, 3, 4, 5}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getPathState().getTotalCost(), equalTo(1));
+    public void findsPathThroughExampleOne() {
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{
+                {3, 4, 1, 2, 8, 6},
+                {6, 1, 8, 2, 7, 4},
+                {5, 9, 3, 9, 9, 5},
+                {8, 4, 1, 3, 2, 6},
+                {3, 7, 2, 8, 6, 4}
+        });
+        MatrixVisitedPath visitor = new MatrixVisitedPath(matrixTwoD);
+        List<Integer> expectedPath = new ArrayList<>(
+                Arrays.asList(new Integer[]{1, 2, 3, 4, 4, 5})
+        );
+
+        PathState solution = visitor.getBestPathForGrid();
+        assertThat(solution.isSuccessful(), is(true));
+        assertThat(solution.getTotalCost(), equalTo(16));
+        assertThat(solution.getRowsTraversed(), equalTo(expectedPath));
     }
 
-    /*
-     * This checks the value of the Total cost variable which stores the cost after multiple move in the matrix
-     */
     @Test
-    public void totalCostAfterTwoMoves() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{1, 2, 3, 4, 5}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getPathState().getTotalCost(), equalTo(3));
+    public void findsPathThroughExampleTwo() {
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{
+                {3, 4, 1, 2, 8, 6},
+                {6, 1, 8, 2, 7, 4},
+                {5, 9, 3, 9, 9, 5},
+                {8, 4, 1, 3, 2, 6},
+                {3, 7, 2, 1, 2, 3}
+        });
+        MatrixVisitedPath visitor = new MatrixVisitedPath(matrixTwoD);
+        List<Integer> expectedPath = new ArrayList<>(
+                Arrays.asList(new Integer[]{1, 2, 1, 5, 4, 5})
+        );
+
+        PathState solution = visitor.getBestPathForGrid();
+        assertThat(solution.isSuccessful(), is(true));
+        assertThat(solution.getTotalCost(), equalTo(11));
+        assertThat(solution.getRowsTraversed(), equalTo(expectedPath));
     }
 
-    /*
-     * This checks the value of the Total cost variable which stores the cost after moving across a row in the matrix
-     */
     @Test
-    public void totalCostAfterMovingThroughEntireRow() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{1, 2, 3, 4, 5}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        for (int i = 0; i < matrixTwoD.getColumnCount(); i++) {
-            matrixVisitedPath.pathVisited();
+    public void findsIncompletePathThroughExampleThree() {
+        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{
+                {19, 10, 19, 10, 19},
+                {21, 23, 20, 19, 12},
+                {20, 12, 20, 11, 10}
+        });
+        MatrixVisitedPath visitor = new MatrixVisitedPath(matrixTwoD);
+        List<Integer> expectedPath = new ArrayList<>(
+                Arrays.asList(new Integer[]{1, 1, 1})
+        );
+
+        PathState solution = visitor.getBestPathForGrid();
+        assertThat(solution.isSuccessful(), is(false));
+        assertThat(solution.getTotalCost(), equalTo(48));
+        assertThat(solution.getRowsTraversed(), equalTo(expectedPath));
+    }
+
+    @Test
+    public void findsPathThroughMaximumGrid() {
+        int[][] gridArray = new int[10][100];
+        for (int row = 0; row < gridArray.length; row++) {
+            for (int column = 0; column < gridArray[0].length; column++) {
+                if (row == 5 && column % 2 == 0) {
+                    gridArray[row][column] = 1;
+                } else if (row == 5) {
+                    gridArray[row][column] = 0;
+                } else {
+                    gridArray[row][column] = 25;
+                }
+            }
         }
-        assertThat(matrixVisitedPath.getPathState().getTotalCost(), equalTo(15));
+        Integer[] expectedPathArray = new Integer[100];
+        for (int row = 0; row < expectedPathArray.length; row++) {
+            expectedPathArray[row] = 6;
+        }
+
+        MatrixTwoD matrixTwoD = new MatrixTwoD(gridArray);
+        MatrixVisitedPath visitor = new MatrixVisitedPath(matrixTwoD);
+        List<Integer> expectedPath = new ArrayList<>(Arrays.asList(expectedPathArray));
+
+        PathState solution = visitor.getBestPathForGrid();
+        assertThat(solution.isSuccessful(), is(true));
+        assertThat(solution.getTotalCost(), equalTo(50));
+        assertThat(solution.getRowsTraversed(), equalTo(expectedPath));
     }
 
     @Test
-    public void isAnotherVisitPossible() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{1, 2, 3, 4, 5}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.visitPossible(), is(true));
+    public void findsPathThroughGridGeneratingManyPaths() throws Exception {
+        int[][] gridArray = new int[][]{
+                {1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5},
+                {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+        };
 
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.visitPossible(), is(false));
+        MatrixTwoD matrixTwoD = new MatrixTwoD(gridArray);
+        MatrixVisitedPath visitor = new MatrixVisitedPath(matrixTwoD);
+
+        PathState solution = visitor.getBestPathForGrid();
+        assertThat(solution.isSuccessful(), is(true));
+        assertThat(solution.getTotalCost(), equalTo(1));
     }
-
-    @Test
-    public void isVisitPossibleAfterTotalCostReachesFiftyOrMore() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{MatrixVisitedPath.MAXIMUM_COST - 4, 2, 3, 4, 5}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.visitPossible(), is(true));
-        matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.visitPossible(), is(false));
-    }
-
-    @Test
-    public void notPossibleToTraverseWhenFirstValueExceedsLimit() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{MatrixVisitedPath.MAXIMUM_COST + 1, 2, 3, 4, 5}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        assertThat(matrixVisitedPath.visitPossible(), is(false));
-    }
-
-    @Test
-    public void totalCostDoesNotAccumulatedIfFirstValueExceedsLimit() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{MatrixVisitedPath.MAXIMUM_COST + 1, 2, 3, 4, 5}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getTotalCost(), equalTo(0));
-
-    }
-
-    @Test
-    public void totalCostDoesNotIncreaseAfterReachingFifty() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{MatrixVisitedPath.MAXIMUM_COST - 2, 2, 3, 4, 5}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getPathState().getTotalCost(), equalTo(50));
-
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getPathState().getTotalCost(), equalTo(50));
-    }
-
-    @Test
-    public void incrementOfColumnValueNotPossible() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{MatrixVisitedPath.MAXIMUM_COST, 2, 3, 4, 5}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getCurrentColumn(), equalTo(1));
-    }
-
-    @Test
-    public void initialColumnAtZero() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{48, 2, 3, 4, 5}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        assertThat(matrixVisitedPath.getCurrentColumn(), equalTo(0));
-    }
-
-    @Test
-    public void incrementOfColumnValueAfterVisit() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{48, 2, 3, 4, 5}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getCurrentColumn(), equalTo(1));
-    }
-
-    @Test
-    public void initialPathIsEmpty() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{48, 2, 3, 4, 5}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        assertThat(matrixVisitedPath.getPathState().getRowsTraversed().size(), equalTo(0));
-    }
-
-    @Test
-    public void rowsAdditionToPathAfterVisit() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{8, 2, 3, 4, 5}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        List<Integer> expectedPath = new ArrayList<>();
-        matrixVisitedPath.pathVisited();
-        expectedPath.add(1);
-        assertThat(matrixVisitedPath.getPathVisited(), equalTo(expectedPath));
-
-        matrixVisitedPath.pathVisited();
-        expectedPath.add(1);
-        assertThat(matrixVisitedPath.getPathVisited(), equalTo(expectedPath));
-    }
-
-    @Test
-    public void initialPathTraverseSuccess() {
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{2, 2, 2, 2, 2}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        assertThat(matrixVisitedPath.getPathState().isSuccessful(), is(false));
-    }
-
-    @Test
-    public void pathTraverseSuccess() {
-
-        MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{2, 2, 2, 2, 2}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getPathState().isSuccessful(), is(true));
-    }
-
-    @Test
-    public void pathTraversePartially() {
-        MatrixTwoD matrixTwoD1 = new MatrixTwoD(new int[][]{{2, 2, 2, 2, 2}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD1);
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getPathState().isSuccessful(), is(false));
-
-    }
-
-    @Test
-    public void pathTraverseFailureDueTOTotalCost() {
-        MatrixTwoD matrixTwoD2 = new MatrixTwoD(new int[][]{{2, 2, 2, 2, 45}});
-        MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD2);
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getPathState().isSuccessful(), is(false));
-
-    }
-
 }
+
+

@@ -43,7 +43,7 @@ public class PathStateTest {
 
     @Test
     public void returnsRowsAdded() {
-        List<Integer> expectedRows = new ArrayList<Integer>();
+        List<Integer> expectedRows = new ArrayList<>();
 
         expectedRows.add(1);
         pathState.addRowWithCost(1, 0);
@@ -113,7 +113,8 @@ public class PathStateTest {
     public void copyConstructorMakesAnExactCopyOfPath() {
         pathState.addRowWithCost(1, 10);
         pathState.addRowWithCost(2, 10);
-        List<Integer> expectedRows = new ArrayList<Integer>();
+
+        List<Integer> expectedRows = new ArrayList<>();
         expectedRows.add(1);
         expectedRows.add(2);
 
@@ -127,7 +128,8 @@ public class PathStateTest {
     @Test
     public void copyConstructorMakesAnIndependentCopyOfPath() {
         pathState.addRowWithCost(1, 10);
-        List<Integer> expectedRows = new ArrayList<Integer>();
+
+        List<Integer> expectedRows = new ArrayList<>();
         expectedRows.add(1);
 
         PathState copy = new PathState(pathState);

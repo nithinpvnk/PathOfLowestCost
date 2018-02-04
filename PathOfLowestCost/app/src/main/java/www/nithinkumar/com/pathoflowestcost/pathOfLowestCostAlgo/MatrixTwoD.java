@@ -1,6 +1,8 @@
 package www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo;
 
 
+import java.util.List;
+
 public class MatrixTwoD {
 
     private int[][] values;
@@ -32,5 +34,11 @@ public class MatrixTwoD {
 
     public int getColumnCount() {
        return values[0].length;
+    }
+
+    public List<Integer> getRowsAdjacentTo(int rowNumber) {
+    }
+
+    public String asDelimitedString(String delimiter) {
     }
 }

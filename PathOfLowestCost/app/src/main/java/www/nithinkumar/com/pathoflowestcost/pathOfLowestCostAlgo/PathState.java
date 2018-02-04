@@ -7,7 +7,7 @@ public class PathState {
 
     public static int MAXIMUM_COST = 50;
 
-    private List<Integer> rowsTraversed = new ArrayList<Integer>();
+    private List<Integer> rowsTraversed = new ArrayList<>();
     private int totalCost = 0;
     private int expectedLength = 0;
 

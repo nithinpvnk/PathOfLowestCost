@@ -30,7 +30,7 @@ public class MatrixVisitedPathTest {
     public void initialTotalCostZero() {
         MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{1, 2, 3, 4, 5}});
         MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        assertThat(matrixVisitedPath.getTotalCost(), equalTo(0));
+        assertThat(matrixVisitedPath.getPathState().getTotalCost(), equalTo(0));
     }
 
     /*
@@ -41,7 +41,7 @@ public class MatrixVisitedPathTest {
         MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{1, 2, 3, 4, 5}});
         MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
         matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getTotalCost(), equalTo(1));
+        assertThat(matrixVisitedPath.getPathState().getTotalCost(), equalTo(1));
     }
 
     /*
@@ -53,7 +53,7 @@ public class MatrixVisitedPathTest {
         MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getTotalCost(), equalTo(3));
+        assertThat(matrixVisitedPath.getPathState().getTotalCost(), equalTo(3));
     }
 
     /*
@@ -66,7 +66,7 @@ public class MatrixVisitedPathTest {
         for (int i = 0; i < matrixTwoD.getColumnCount(); i++) {
             matrixVisitedPath.pathVisited();
         }
-        assertThat(matrixVisitedPath.getTotalCost(), equalTo(15));
+        assertThat(matrixVisitedPath.getPathState().getTotalCost(), equalTo(15));
     }
 
     @Test
@@ -115,11 +115,11 @@ public class MatrixVisitedPathTest {
         MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getTotalCost(), equalTo(50));
+        assertThat(matrixVisitedPath.getPathState().getTotalCost(), equalTo(50));
 
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getTotalCost(), equalTo(50));
+        assertThat(matrixVisitedPath.getPathState().getTotalCost(), equalTo(50));
     }
 
     @Test
@@ -150,7 +150,7 @@ public class MatrixVisitedPathTest {
     public void initialPathIsEmpty() {
         MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{48, 2, 3, 4, 5}});
         MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        assertThat(matrixVisitedPath.getPathVisited().size(), equalTo(0));
+        assertThat(matrixVisitedPath.getPathState().getRowsTraversed().size(), equalTo(0));
     }
 
     @Test
@@ -171,7 +171,7 @@ public class MatrixVisitedPathTest {
     public void initialPathTraverseSuccess() {
         MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{2, 2, 2, 2, 2}});
         MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        assertThat(matrixVisitedPath.isSuccessful(), is(false));
+        assertThat(matrixVisitedPath.getPathState().successful, is(false));
     }
 
     @Test
@@ -184,7 +184,7 @@ public class MatrixVisitedPathTest {
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.isSuccessful(), is(true));
+        assertThat(matrixVisitedPath.getPathState().successful, is(true));
     }
 
     @Test
@@ -195,7 +195,7 @@ public class MatrixVisitedPathTest {
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.isSuccessful(), is(false));
+        assertThat(matrixVisitedPath.getPathState().successful, is(false));
 
     }
 
@@ -208,7 +208,7 @@ public class MatrixVisitedPathTest {
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.isSuccessful(), is(false));
+        assertThat(matrixVisitedPath.getPathState().successful, is(false));
 
     }
 

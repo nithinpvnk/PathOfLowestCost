@@ -6,12 +6,14 @@ import java.util.List;
 
 public class MatrixVisitedPath {
 
+    public static int MAXIMUM_COST = 50;
+
     //Variable to hold the cost of the path
     private int totalCost;
     private int currentColumn;
-    private List<Integer> pathVisited = new ArrayList<>();
-    public static int MAXIMUM_COST = 50;
+    private List<Integer> pathVisited;
     private MatrixTwoD matrixTwoD;
+    private PathState pathState;
 
     public MatrixVisitedPath(MatrixTwoD matrixTwoD) {
         if (matrixTwoD == null) {
@@ -19,6 +21,8 @@ public class MatrixVisitedPath {
         }
 
         this.matrixTwoD = matrixTwoD;
+        this.pathVisited = new ArrayList<>();
+        this.pathState = new PathState();
     }
 
 
@@ -31,12 +35,22 @@ public class MatrixVisitedPath {
         return currentColumn;
     }
 
+    public List<Integer> getPathVisited() {
+        return pathVisited;
+    }
+
+    public PathState getPathState() {
+        return pathState;
+    }
+
     public void pathVisited() {
         int currentRow = 1;
         if (visitPossible()) {
             currentColumn++;
             totalCost += matrixTwoD.getValueAtCell(currentRow, currentColumn);
             pathVisited.add(1);
+            pathState.addRow(1, matrixTwoD.getValueAtCell(currentRow, currentColumn));
+            pathState.successful = isSuccessful();
         }
     }
 
@@ -44,9 +58,6 @@ public class MatrixVisitedPath {
         return ((currentColumn < matrixTwoD.getColumnCount()) && (!nextVisitPossible()));
     }
 
-    public List<Integer> getPathVisited() {
-        return pathVisited;
-    }
 
     public boolean isSuccessful() {
         return (pathVisited.size() == matrixTwoD.getColumnCount()) && (totalCost < MAXIMUM_COST);

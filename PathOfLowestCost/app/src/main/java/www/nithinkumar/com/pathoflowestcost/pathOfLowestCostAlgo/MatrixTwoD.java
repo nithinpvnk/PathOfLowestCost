@@ -1,7 +1,10 @@
 package www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo;
 
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MatrixTwoD {
 
@@ -23,8 +26,7 @@ public class MatrixTwoD {
     /*
      * Method to retrive the value at a particular cell in the Matrix
      */
-    public int getValueAtCell(int row, int column)
-    {
+    public int getValueAtCell(int row, int column) {
         return values[row - 1][column - 1];
     }
 
@@ -33,12 +35,50 @@ public class MatrixTwoD {
     }
 
     public int getColumnCount() {
-       return values[0].length;
+        return values[0].length;
     }
 
     public List<Integer> getRowsAdjacentTo(int rowNumber) {
+        Set<Integer> adjacentRows = new HashSet<>();
+
+        if (isValidRowNumber(rowNumber)) {
+            adjacentRows.add(rowNumber);
+            adjacentRows.add(getRowAbove(rowNumber));
+            adjacentRows.add(getRowBelow(rowNumber));
+        }
+
+        return new ArrayList<>(adjacentRows);
     }
 
     public String asDelimitedString(String delimiter) {
+        StringBuilder builder = new StringBuilder();
+
+        for (int row = 0; row < values.length; row++) {
+            for (int column = 0; column < values[row].length; column++) {
+                builder.append(values[row][column]);
+                if (column < values[row].length - 1) {
+                    builder.append(delimiter);
+                }
+            }
+            if (row < values.length - 1) {
+                builder.append("\n");
+            }
+        }
+        return builder.toString();
     }
+
+    private boolean isValidRowNumber(int rowNumber) {
+        return (rowNumber > 0) && (rowNumber <= values.length);
+    }
+
+    private int getRowAbove(int rowNumber) {
+        int potentialRowNumber = rowNumber - 1;
+        return (potentialRowNumber < 1) ? values.length : potentialRowNumber;
+    }
+
+    private int getRowBelow(int rowNumber) {
+        int potentialRowNumber = rowNumber + 1;
+        return (potentialRowNumber > values.length) ? 1 : potentialRowNumber;
+    }
+
 }

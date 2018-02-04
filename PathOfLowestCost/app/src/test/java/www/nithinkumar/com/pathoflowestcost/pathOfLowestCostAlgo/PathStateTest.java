@@ -1,4 +1,4 @@
-package www.nithinkumar.com.pathoflowestcost;
+package www.nithinkumar.com.pathoflowestcost.pathOfLowestCostAlgo;
 
 import org.junit.Before;
 import org.junit.Test;

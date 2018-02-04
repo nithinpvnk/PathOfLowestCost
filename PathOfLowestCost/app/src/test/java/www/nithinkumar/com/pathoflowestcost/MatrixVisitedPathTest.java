@@ -171,7 +171,7 @@ public class MatrixVisitedPathTest {
     public void initialPathTraverseSuccess() {
         MatrixTwoD matrixTwoD = new MatrixTwoD(new int[][]{{2, 2, 2, 2, 2}});
         MatrixVisitedPath matrixVisitedPath = new MatrixVisitedPath(matrixTwoD);
-        assertThat(matrixVisitedPath.getPathState().successful, is(false));
+        assertThat(matrixVisitedPath.getPathState().isSuccessful(), is(false));
     }
 
     @Test
@@ -184,7 +184,7 @@ public class MatrixVisitedPathTest {
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getPathState().successful, is(true));
+        assertThat(matrixVisitedPath.getPathState().isSuccessful(), is(true));
     }
 
     @Test
@@ -195,7 +195,7 @@ public class MatrixVisitedPathTest {
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getPathState().successful, is(false));
+        assertThat(matrixVisitedPath.getPathState().isSuccessful(), is(false));
 
     }
 
@@ -208,7 +208,7 @@ public class MatrixVisitedPathTest {
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
         matrixVisitedPath.pathVisited();
-        assertThat(matrixVisitedPath.getPathState().successful, is(false));
+        assertThat(matrixVisitedPath.getPathState().isSuccessful(), is(false));
 
     }
 

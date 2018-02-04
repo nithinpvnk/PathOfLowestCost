@@ -22,7 +22,7 @@ public class MatrixVisitedPath {
 
         this.matrixTwoD = matrixTwoD;
         this.pathVisited = new ArrayList<>();
-        this.pathState = new PathState();
+        this.pathState = new PathState(2);
     }
 
 
@@ -49,8 +49,8 @@ public class MatrixVisitedPath {
             currentColumn++;
             totalCost += matrixTwoD.getValueAtCell(currentRow, currentColumn);
             pathVisited.add(1);
-            pathState.addRow(1, matrixTwoD.getValueAtCell(currentRow, currentColumn));
-            pathState.successful = isSuccessful();
+            pathState.addRowWithCost(1, matrixTwoD.getValueAtCell(currentRow, currentColumn));
+         //   pathState.isSuccessful() = isSuccessful();
         }
     }
 

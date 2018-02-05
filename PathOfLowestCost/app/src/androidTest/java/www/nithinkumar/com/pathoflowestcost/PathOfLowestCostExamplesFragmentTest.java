@@ -96,44 +96,12 @@ public class PathOfLowestCostExamplesFragmentTest {
         onView(withId(R.id.grid_contents)).check(matches(withText(expectedContents)));
     }
 
-    @Test
-    public void clickingExampleOneButtonLoadsExampleGridNine() {
-        String expectedContents = Examples.EXAMPLE_GRID_1.asDelimitedString("\t");
-        onView(withId(R.id.grid_1_button)).perform(click());
 
-        onView(withId(R.id.grid_contents)).check(matches(withText(expectedContents)));
-    }
-
-    @Test
-    public void clickingExampleOneButtonLoadsExampleGridTen() {
-        String expectedContents = Examples.EXAMPLE_GRID_1.asDelimitedString("\t");
-        onView(withId(R.id.grid_1_button)).perform(click());
-
-        onView(withId(R.id.grid_contents)).check(matches(withText(expectedContents)));
-    }
-
-    @Test
-    public void clickingExampleOneButtonLoadsExampleGridEleven() {
-        String expectedContents = Examples.EXAMPLE_GRID_1.asDelimitedString("\t");
-        onView(withId(R.id.grid_1_button)).perform(click());
-
-        onView(withId(R.id.grid_contents)).check(matches(withText(expectedContents)));
-    }
-
-    @Test
-    public void clickingExampleOneButtonLoadsExampleGridTwelve() {
-        String expectedContents = Examples.EXAMPLE_GRID_1.asDelimitedString("\t");
-        onView(withId(R.id.grid_1_button)).perform(click());
-
-        onView(withId(R.id.grid_contents)).check(matches(withText(expectedContents)));
-    }
-
-
-    @Test
-    public void goButtonIsDisabledByDefault() {
-        onView(withId(R.id.go_button)).check((ViewAssertion) isEnabled());
-        //assertThat(goButton.isEnabled(), is(false));
-    }
+//    @Test
+//    public void goButtonIsDisabledByDefault() {
+//        onView(withId(R.id.go_button)).check((ViewAssertion) isEnabled());
+//        //assertThat(goButton.isEnabled(), is(false));
+//    }
 
 //    @Test
 //    public void clickingAnyExampleGridButtonEnablesGoButton() {
@@ -200,15 +168,15 @@ public class PathOfLowestCostExamplesFragmentTest {
 
     }
 
-    @Test
-    public void selectingTheSameGridDoesNotClearResults() {
-        onView(withId(R.id.grid_1_button)).perform(click());
-        onView(withId(R.id.go_button)).perform(click());
-        onView(withId(R.id.grid_1_button)).perform(click());
-        onView(withId(R.id.results_success)).check(matches(withText("")));
-        onView(withId(R.id.results_total_cost)).check(matches(withText("No Results")));
-        onView(withId(R.id.results_path_taken)).check(matches(withText("")));
-    }
+//    @Test
+//    public void selectingTheSameGridDoesNotClearResults() {
+//        onView(withId(R.id.grid_1_button)).perform(click());
+//        onView(withId(R.id.go_button)).perform(click());
+//        onView(withId(R.id.grid_1_button)).perform(click());
+//        assertThat(onView(withId(R.id.results_success)).check(matches(withText("")));
+//        onView(withId(R.id.results_total_cost)).check(matches(withText("No Results")));
+//        onView(withId(R.id.results_path_taken)).check(matches(withText("")));
+//    }
 
 }
 

@@ -1,8 +1,9 @@
 package www.nithinkumar.com.pathoflowestcost;
 
-import android.support.test.espresso.ViewAssertion;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.widget.Button;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,10 +14,11 @@ import www.nithinkumar.com.pathoflowestcost.util.Examples;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 @RunWith(AndroidJUnit4.class)
 public class PathOfLowestCostExamplesFragmentTest {
@@ -96,33 +98,32 @@ public class PathOfLowestCostExamplesFragmentTest {
         onView(withId(R.id.grid_contents)).check(matches(withText(expectedContents)));
     }
 
+    @Test
+    public void goButtonIsDisabledByDefault() {
+        Button goButton = fragment.getView().findViewById(R.id.go_button);
+        assertThat(goButton.isEnabled(), is(false));
+    }
 
-//    @Test
-//    public void goButtonIsDisabledByDefault() {
-//        onView(withId(R.id.go_button)).check((ViewAssertion) isEnabled());
-//        //assertThat(goButton.isEnabled(), is(false));
-//    }
+    @Test
+    public void clickingAnyExampleGridButtonEnablesGoButton() {
 
-//    @Test
-//    public void clickingAnyExampleGridButtonEnablesGoButton() {
-//
-//        onView(withId(R.id.grid_3_button)).perform(click());
-//        onView(withId(R.id.go_button)).perform(click());
-//
-//        onView(withId(R.id.results_success)).check(matches(withText("No")));
-//        Button goButton = (Button) getViewFromFragment(R.id.go_button);
-//
-//        getViewFromFragment(R.id.grid_1_button).performClick();
-//        assertThat(goButton.isEnabled(), is(true));
-//        goButton.setEnabled(false);
-//
-//        getViewFromFragment(R.id.grid_2_button).performClick();
-//        assertThat(goButton.isEnabled(), is(true));
-//        goButton.setEnabled(false);
-//
-//        getViewFromFragment(R.id.grid_3_button).performClick();
-//        assertThat(goButton.isEnabled(), is(true));
-//    }
+        onView(withId(R.id.grid_3_button)).perform(click());
+        onView(withId(R.id.go_button)).perform(click());
+
+        onView(withId(R.id.results_success)).check(matches(withText("No")));
+        Button goButton = fragment.getView().findViewById(R.id.go_button);
+
+        fragment.getView().findViewById(R.id.grid_1_button).performClick();
+        assertThat(goButton.isEnabled(), is(true));
+        goButton.setEnabled(false);
+
+        fragment.getView().findViewById(R.id.grid_2_button).performClick();
+        assertThat(goButton.isEnabled(), is(true));
+        goButton.setEnabled(false);
+
+        fragment.getView().findViewById(R.id.grid_3_button).performClick();
+        assertThat(goButton.isEnabled(), is(true));
+    }
 
     @Test
     public void clickingGoAfterClickingAGridButtonDisplaysYesIfPathSuccessful() {

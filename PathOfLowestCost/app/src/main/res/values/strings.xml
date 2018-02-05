@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">PathOfLowestCost</string>
+    <string name="example_1">1</string>
+    <string name="example_2">2</string>
+    <string name="example_3">3</string>
+    <string name="example_4">4</string>
+    <string name="example_5">5</string>
+    <string name="example_6">6</string>
+    <string name="example_7">7</string>
+    <string name="example_8">8</string>
+    <string name="example_9">9</string>
+    <string name="example_10">10</string>
+    <string name="example_11">11</string>
+    <string name="example_12">12</string>
+
+    <string name="grid_contents_default">Grid is empty</string>
+    <string name="no_results">No Results</string>
+    <string name="answer_title">Answer</string>
 </resources>

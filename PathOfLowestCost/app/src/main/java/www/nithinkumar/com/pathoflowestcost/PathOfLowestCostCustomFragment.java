@@ -27,7 +27,7 @@ public class PathOfLowestCostCustomFragment extends Fragment {
                              Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.fragment_lowest_cost_custom_main, container, false);
 
-        Button goButton = fragmentView.findViewById(R.id.go_button);
+        Button goButton = fragmentView.findViewById(R.id.go_button_custom);
         goButton.setOnClickListener(new GoOnClickListener());
 
         EditText customGridContents = fragmentView.findViewById(R.id.custom_grid_contents);
@@ -64,13 +64,13 @@ public class PathOfLowestCostCustomFragment extends Fragment {
         PathState bestPath = visitor.getBestPathForGrid();
 
         if (bestPath.isSuccessful()) {
-            ((TextView) getView().findViewById(R.id.results_success)).setText("Yes");
+            ((TextView) getView().findViewById(R.id.results_success_custom)).setText("Yes");
         } else {
-            ((TextView) getView().findViewById(R.id.results_success)).setText("No");
+            ((TextView) getView().findViewById(R.id.results_success_custom)).setText("No");
         }
-        ((TextView) getView().findViewById(R.id.results_total_cost)).setText(Integer.toString(bestPath.getTotalCost()));
-        ((TextView) getView().findViewById(R.id.results_path_taken)).setText(formatPath(bestPath));
-        ((TextView) getView().findViewById(R.id.grid_contents)).setText(matrixTwoD.asDelimitedString("\t"));
+        ((TextView) getView().findViewById(R.id.results_total_cost_custom)).setText(Integer.toString(bestPath.getTotalCost()));
+        ((TextView) getView().findViewById(R.id.results_path_taken_custom)).setText(formatPath(bestPath));
+        ((TextView) getView().findViewById(R.id.grid_contents_custom)).setText(matrixTwoD.asDelimitedString("\t"));
     }
 
     class GridContentsWatcher implements TextWatcher {
@@ -79,7 +79,7 @@ public class PathOfLowestCostCustomFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            Button goButton =  getView().findViewById(R.id.go_button);
+            Button goButton =  getView().findViewById(R.id.go_button_custom);
             goButton.setEnabled(!s.toString().isEmpty());
         }
 

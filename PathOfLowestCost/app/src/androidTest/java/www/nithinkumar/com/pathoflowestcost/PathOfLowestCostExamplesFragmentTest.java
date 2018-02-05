@@ -1,5 +1,6 @@
 package www.nithinkumar.com.pathoflowestcost;
 
+import android.support.test.espresso.ViewAssertion;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.Button;
@@ -14,9 +15,11 @@ import www.nithinkumar.com.pathoflowestcost.util.Examples;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
@@ -31,6 +34,7 @@ public class PathOfLowestCostExamplesFragmentTest {
     @Before
     public void setUp() {
         fragment = new PathOfLowestCostExamplesFragment();
+        mActivityTestRule.getActivity().onAttachFragment(fragment);
         assertNotNull(fragment);
     }
 
@@ -38,7 +42,6 @@ public class PathOfLowestCostExamplesFragmentTest {
     public void clickingExampleOneButtonLoadsExampleGridOne() {
         String expectedContents = Examples.EXAMPLE_GRID_1.asDelimitedString("\t");
         onView(withId(R.id.grid_1_button)).perform(click());
-
         onView(withId(R.id.grid_contents)).check(matches(withText(expectedContents)));
     }
 
@@ -99,33 +102,6 @@ public class PathOfLowestCostExamplesFragmentTest {
     }
 
     @Test
-    public void goButtonIsDisabledByDefault() {
-        Button goButton = fragment.getView().findViewById(R.id.go_button);
-        assertThat(goButton.isEnabled(), is(false));
-    }
-
-    @Test
-    public void clickingAnyExampleGridButtonEnablesGoButton() {
-
-        onView(withId(R.id.grid_3_button)).perform(click());
-        onView(withId(R.id.go_button)).perform(click());
-
-        onView(withId(R.id.results_success)).check(matches(withText("No")));
-        Button goButton = fragment.getView().findViewById(R.id.go_button);
-
-        fragment.getView().findViewById(R.id.grid_1_button).performClick();
-        assertThat(goButton.isEnabled(), is(true));
-        goButton.setEnabled(false);
-
-        fragment.getView().findViewById(R.id.grid_2_button).performClick();
-        assertThat(goButton.isEnabled(), is(true));
-        goButton.setEnabled(false);
-
-        fragment.getView().findViewById(R.id.grid_3_button).performClick();
-        assertThat(goButton.isEnabled(), is(true));
-    }
-
-    @Test
     public void clickingGoAfterClickingAGridButtonDisplaysYesIfPathSuccessful() {
         onView(withId(R.id.grid_1_button)).perform(click());
         onView(withId(R.id.go_button)).perform(click());
@@ -168,16 +144,6 @@ public class PathOfLowestCostExamplesFragmentTest {
         onView(withId(R.id.results_path_taken)).check(matches(withText("")));
 
     }
-
-//    @Test
-//    public void selectingTheSameGridDoesNotClearResults() {
-//        onView(withId(R.id.grid_1_button)).perform(click());
-//        onView(withId(R.id.go_button)).perform(click());
-//        onView(withId(R.id.grid_1_button)).perform(click());
-//        assertThat(onView(withId(R.id.results_success)).check(matches(withText("")));
-//        onView(withId(R.id.results_total_cost)).check(matches(withText("No Results")));
-//        onView(withId(R.id.results_path_taken)).check(matches(withText("")));
-//    }
 
 }
 
